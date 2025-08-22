@@ -8,8 +8,10 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
-import "./app.css";
-
+import stylesheet from "./app.css?url";
+import Navigation from "./common/components/navigation";
+console.log(stylesheet);
+// 링크 함수를 여기에서 정의한다.
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -19,13 +21,14 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    // href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    href: stylesheet,
   },
 ];
-
+// 레이아웃 컴포넌트를 여기에서 정의한다.
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className = "dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,6 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -40,11 +44,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
-
+// default funtion 컴포넌트를 여기에서 정의한다.
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Navigation isLoggedIn={true} hasNotifications={true} hasMessages={true}/>  
+      <Outlet />
+    </>
+  );
 }
-
+// 에러 바운더리 컴포넌트를 여기에서 정의한다.
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
