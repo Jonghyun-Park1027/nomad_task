@@ -16,12 +16,12 @@ const menus = [
             {
                 name : "만세력 계산기",
                 description : "사용자 정보를 입력하고 만세력을 출력하는 서비스",
-                to : "/products/만세력",
+                to : "/products/manseryuk",
             },
             {
                 name : "나의 만세력",
                 description : "내 정보 입력으로 생성된 만세력 리스트",
-                to : "/products/나의 사주정보",
+                to : "/products/my-manseryuk",
             },
             
         ]
@@ -38,7 +38,7 @@ const menus = [
             {
                 name : "나의 사주 상담",
                 description : "내 정보 입력으로 생성된 사주 상담 리스트",
-                to : "/talks/나의 사주정보",
+                to : "/talks/my-talks",
             },
             {
                 name : "Part-time Job",
@@ -138,7 +138,7 @@ export default function Navigation({
                                 {menu.items?.map((item) => (
                                     <NavigationMenuItem key={item.name} className={cn([
                                         "select-none rounded-md",
-                                        item.to === "/products/만세력" && "col-span-2",
+                                        item.to === "/products/manseryuk" && "col-span-2",
                                         item.to === "/talks" && "col-span-2",
                                         item.to === "/analysis" && "col-span-2",
                                     ])}>
@@ -146,7 +146,7 @@ export default function Navigation({
                                             <Link
                                             className={cn([ // conditional classNames
                                                 "p-3 space-y-1 block leading-none no-underline outline-none",
-                                                item.to === "/products/만세력" && "bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
+                                                item.to === "/products/manseryuk" && "bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
                                                 item.to === "/talks" && "bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
                                                 item.to === "/analysis" && "bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
                                             ])}

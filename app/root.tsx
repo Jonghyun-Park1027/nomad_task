@@ -28,7 +28,7 @@ export const links: Route.LinksFunction = () => [
 // 레이아웃 컴포넌트를 여기에서 정의한다.
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className = "dark">
+    <html lang="en" className = "">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,10 +47,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 // default funtion 컴포넌트를 여기에서 정의한다.
 export default function App() {
   return (
-    <>
+    <div className="py-28">
       <Navigation isLoggedIn={true} hasNotifications={true} hasMessages={true}/>  
       <Outlet />
-    </>
+    </div>
   );
 }
 // 에러 바운더리 컴포넌트를 여기에서 정의한다.

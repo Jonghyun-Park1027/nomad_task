@@ -44,9 +44,8 @@ app/
 │   │   ├── navigation.tsx     # 메인 네비게이션 (사주AI 브랜딩)
 │   │   └── ui/                # Shadcn UI 컴포넌트들
 │   └── pages/
-│       ├── home-page.tsx      # 홈페이지
-│       └── color-test.tsx     # 컬러 테스트 페이지
-├── features/                  # 기능별 모듈 (확장 예정)
+│       └── home-page.tsx      # 홈페이지 (3열 그리드 레이아웃)
+├── features/                  # 기능별 모듈 (products, community, ideas)
 ├── lib/
 │   └── utils.ts              # cn() 유틸리티 함수
 └── root.tsx                  # 루트 레이아웃
@@ -55,7 +54,7 @@ app/
 ### UI System
 - **Shadcn UI**: `~/common/components/ui/`에 위치
 - **스타일**: new-york 스타일, neutral 베이스 컬러
-- **다크모드**: 기본 활성화 (`dark` 클래스)
+- **다크모드**: 기본 비활성화 (라이트모드 우선)
 - **TypeScript**: 모든 컴포넌트에서 strict typing
 
 ## Key Development Rules
@@ -81,11 +80,16 @@ app/
 
 ## Navigation Structure
 메인 네비게이션에서 다음 섹션들을 지원:
-- **만세력**: 만세력 계산기, 나의 만세력
-- **사주 상담**: AI 상담, 나의 상담 기록
+- **만세력**: `/products/manseryuk` (만세력 계산기), `/products/my-manseryuk` (나의 만세력)
+- **사주 상담**: AI 상담, `/talks/my-talks` (나의 상담 기록)
 - **사주 분석**: AI 분석, Top 분석, 나의 분석
 - **IdeaGPT**: 아이디어 생성 도구
 - **Teams**: 팀 관련 기능
+
+### 홈페이지 구조
+- **3열 그리드 레이아웃**: 만세력, 나의 만세력, 사주AI, Jobs 섹션
+- **각 섹션별 카드 컴포넌트**: ProductCard, PostCard, IdeaCard 활용
+- **반응형 디자인**: Tailwind CSS 그리드 시스템 사용
 
 ## TypeScript Configuration
 - **Strict typing** 활성화

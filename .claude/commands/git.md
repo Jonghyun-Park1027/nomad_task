@@ -16,3 +16,5 @@ ONCE user confirm it with yes proceed to the next step.
 5. Commit the changes git add . then git commit
 
 6. Always write in 한국어
+
+7. After reviewing the project, add items to .gitignore as needed, have the user review them, and then update the .gitignore file.

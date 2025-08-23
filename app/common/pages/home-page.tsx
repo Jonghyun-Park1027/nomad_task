@@ -1,77 +1,111 @@
-import type { Route } from "./+types/home-page";
+import { Link } from "react-router";
+import type { MetaFunction } from "react-router";
+import { ProductCard } from "~/features/products/components/product-card";
+import { PostCard } from "~/features/community/components/post-card";
+import { IdeaCard } from "~/features/ideas/components/idea-card";
+import { Button } from "../components/ui/button";
+import { Card, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
 
-export function loader({ request }: Route.LoaderArgs) {
-  return {
-    title: "홈페이지",
-    description: "React Router와 Tailwind CSS로 만든 홈페이지입니다."
-  };
-}
-
-export function action({ request }: Route.ActionArgs) {
-  return {};
-}
-
-export function meta({ data }: Route.MetaFunction) {
+export const meta : MetaFunction = () => {
   return [
-    { title: data?.title || "홈페이지" },
-    { name: "description", content: data?.description || "React Router 애플리케이션" }
+    { title: "Home | 사주 AI" },
+    { name: "description", content: "사주 AI에 오신 것을 환영합니다." },
   ];
-}
+};
 
-export default function HomePage({ loaderData }: Route.ComponentProps) {
+export default function HomePage() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            {loaderData?.title || "환영합니다"}
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
-            {loaderData?.description || "React Router와 Tailwind CSS로 만든 현대적인 웹 애플리케이션입니다."}
-          </p>
-        </header>
-
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              🚀 빠른 개발
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              React Router와 TypeScript를 사용하여 빠르고 안전한 개발 환경을 제공합니다.
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              🎨 현대적인 UI
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Tailwind CSS와 Shadcn UI를 활용하여 아름답고 반응형인 사용자 인터페이스를 구현합니다.
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              ⚡ 최적화
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Vite를 통한 빠른 빌드와 HMR을 지원하여 개발 생산성을 극대화합니다.
-            </p>
-          </div>
-        </section>
-
-        <section className="mt-12 text-center">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-8 text-white">
-            <h2 className="text-3xl font-bold mb-4">시작해보세요</h2>
-            <p className="text-xl mb-6 opacity-90">
-              지금 바로 개발을 시작하고 멋진 애플리케이션을 만들어보세요!
-            </p>
-            <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              시작하기
-            </button>
-          </div>
-        </section>
+    <div className="px-20 space-y-40">
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold">사주AI 시작페이지</h2>
+          <p className="text-xl font-light text-foreground">사주 AI는 사주를 분석하고 추천을 해주는 서비스입니다.</p>
+          <Button variant="link" className="text-lg p-0" asChild>
+            <Link to="/products/manseryuk">
+              만세력 계산기 &rarr;
+            </Link>
+          </Button>
+        </div>
+        
+          { Array.from({ length: 10 }).map((_, index) => (
+            <ProductCard
+            productId="productId"
+            title="만세력 계산기"
+            description="만세력 계산 서비스"
+            conversationCount={12}
+            viewCount={12}
+            upvoteCount={120}
+          />
+          ))}
       </div>
-    </main>
+      <div className="grid grid-cols-3 gap-4"> 
+        {/* TODO1: 이거 어떻게 할지 고민 - 나의 만세력 or 사주 해석모델 */}
+        <div>
+          <h2 className="text-5xl font-bold">나의 만세력</h2> 
+          <p className="text-xl font-light text-foreground">
+            나의 사주를 바탕으로 AI의 정확한 상담을 받아보세요.
+            </p>
+          <Button variant="link" className="text-lg p-0" asChild>
+            <Link to="/products/manseryuk">
+              내 만세력 보기 &rarr;
+            </Link>
+          </Button>
+        </div>
+      {Array.from({ length: 10 }).map((_, index) => (
+        <PostCard
+          postId="manseryuk"
+          title="Discussion Title"
+          authorName="Park"
+          authorAvatar="https://github.com/apple.png"
+          category="Productivity"
+          timeAgo="12 hours ago"
+        />
+      ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4"> {/* TODO2: GPT는 뭘로 바꿔야하지..? */}
+        
+        <div>
+          <h2 className="text-5xl font-bold">사주AI</h2> 
+          <p className="text-xl font-light text-foreground">
+            나의 사주를 바탕으로 AI의 정확한 상담을 받아보세요.
+            </p>
+          <Button variant="link" className="text-lg p-0" asChild>
+            <Link to="/products/manseryuk">
+              내 사주 상담 보기 &rarr;
+            </Link>
+          </Button>
+        </div>
+        {Array.from({ length: 10 }).map((_, index) => (
+                 <IdeaCard
+           ideaId="ideaId"
+           title="지난 사주 상담 기록"
+           viewCount={123}
+           likeCount={122} 
+           timeAgo="12 hours ago"
+           claimed={index % 2 === 0}
+         />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4"> {/* TODO3: jobs는 뭘로 바꿔야하지..? */}
+        
+        <div>
+          <h2 className="text-5xl font-bold">Latest Jobs</h2> 
+          <p className="text-xl font-light text-foreground">
+            Find your dream job with our latest jobs.
+            </p>
+          <Button variant="link"  className="text-lg p-0" asChild>
+            <Link to="/products/manseryuk">
+              View all jobs &rarr;  
+            </Link>
+          </Button>
+        </div>
+       <Card className = "bg-transparent hover:bg-card/50">
+        <CardHeader>
+          <CardTitle>Job Title</CardTitle>
+          <CardDescription>Job Description</CardDescription>
+        </CardHeader>
+       </Card>
+      </div>
+    </div>
   );
 }
