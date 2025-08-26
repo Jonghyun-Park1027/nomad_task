@@ -18,3 +18,5 @@ ONCE user confirm it with yes proceed to the next step.
 6. Always write in 한국어
 
 7. After reviewing the project, add items to .gitignore as needed, have the user review them, and then update the .gitignore file.
+
+8. Update readme.md based on the commit content.

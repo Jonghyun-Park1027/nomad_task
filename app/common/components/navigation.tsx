@@ -23,6 +23,26 @@ const menus = [
                 description : "내 정보 입력으로 생성된 만세력 리스트",
                 to : "/products/my-manseryuk",
             },
+            {
+                name : "categories",
+                description : "만세력 카테고리",
+                to : "/products/categories",
+            },
+            {
+                name : "search",
+                description : "검색",
+                to : "/products/search",
+            },
+            {
+                name : "submit",
+                description : "만세력 제출",
+                to : "/products/submit",
+            },
+            {
+                name : "promote",
+                description : "만세력 홍보",
+                to : "/products/promote",
+            },
             
         ]
     },
@@ -70,6 +90,11 @@ const menus = [
                 name : "AI 사주 분석",
                 description : "AI 사주 분석",
                 to : "/analysis",
+            },
+            {
+                name : "내 사주 찾기",
+                description : "내 사주 찾기",
+                to : "/analysis/search",
             },
             {
                 name : "Top 사주 분석",
@@ -151,7 +176,7 @@ export default function Navigation({
                                                 item.to === "/analysis" && "bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
                                             ])}
                                             to={item.to}>
-                                                <span className="text-sm text-primary-foreground font-medium leading-none">{item.name}</span>
+                                                <span className="text-sm text-foreground font-medium leading-none">{item.name}</span>
                                                 <p className="text-sm leading-snug text-muted-foreground">{item.description}</p>
                                             </Link>
                                         </NavigationMenuLink>
