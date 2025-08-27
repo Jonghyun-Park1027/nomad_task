@@ -50,12 +50,13 @@ export default function HomePage() {
             나의 사주를 바탕으로 AI의 정확한 상담을 받아보세요.
           </p>
           <Button variant="link" className="text-lg p-0" asChild>
-            <Link to="/products/manseryuk">내 사주 상담 보기 &rarr;</Link>
+            <Link to="/ideas">내 사주 상담 보기 &rarr;</Link>
           </Button>
         </div>
         {Array.from({ length: 10 }).map((_, index) => (
           <IdeaCard
-            ideaId="ideaId"
+            key={`idea-${index}`}
+            ideaId={`idea-${index}`}
             title="지난 사주 상담 기록"
             viewCount={123}
             likeCount={122}
@@ -73,7 +74,7 @@ export default function HomePage() {
             Find your dream job with our latest jobs.
           </p>
           <Button variant="link" className="text-lg p-0" asChild>
-            <Link to="/products/manseryuk">View all jobs &rarr;</Link>
+            <Link to="/jobs">View all jobs &rarr;</Link>
           </Button>
         </div>
         {Array.from({ length: 10 }).map((_, index) => (

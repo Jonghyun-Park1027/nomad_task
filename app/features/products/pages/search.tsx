@@ -38,7 +38,7 @@ export function loader({ request }: Route.LoaderArgs) {
 
 export default function SearchPage({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="space-y-5">
+    <div className="space-y-10">
       <HeroHeader
         title="Search"
         description="Search for products on Manseryuk"

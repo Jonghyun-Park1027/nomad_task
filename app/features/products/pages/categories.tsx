@@ -1,28 +1,26 @@
-import type { Route } from "../../../+types/categories";
+import { HeroHeader } from "~/common/components/hero";
+import type { Route } from "./+types/category-page";
+import { CategoryCard } from "../components/category-card";
 
-export function loader({ request }: Route.LoaderArgs) {
-  return {
-    categories: []
-  };
-}
-
-export function action({ request }: Route.ActionArgs) {
-  return {};
-}
-
-export function meta(): Route.MetaFunction {
+export const meta: Route.MetaFunction = () => {
   return [
-    { title: "Categories - Manseryuk" },
-    { name: "description", content: "Browse products by categories" }
+    { title: "Category - Manseryuk" },
+    { name: "description", content: "Products in this category" },
   ];
-}
+};
 
-export default function CategoriesPage({ loaderData, actionData }: Route.ComponentProps) {
+export default function CategoryPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Categories</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Category cards will be rendered here */}
+    <div className="space-y-5">
+      <HeroHeader title="Category" description="Products in this category" />
+      <div className="grid grid-cols-4 gap-10">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <CategoryCard
+            categoryId={`categoryId-${index}`}
+            name="Category Name"
+            description="Category Description"
+          />
+        ))}
       </div>
     </div>
   );

@@ -1,44 +1,71 @@
-import type { Route } from "../../../+types/promote";
+import { HeroHeader } from "~/common/components/hero";
+import type { Route } from "./+types/promote";
+import SelectPair from "~/common/components/select-pair";
+import { Form } from "react-router";
+import { Calendar } from "~/common/components/ui/calendar";
+import { Label } from "~/common/components/ui/label";
+import { useState } from "react";
+import type { DateRange } from "react-day-picker";
+import { DateTime } from "luxon";
+import { Button } from "~/common/components/ui/button";
 
-export function loader({ request }: Route.LoaderArgs) {
-  return {
-    promotionPlans: []
-  };
-}
-
-export function action({ request }: Route.ActionArgs) {
-  return {};
-}
-
-export function meta(): Route.MetaFunction {
+export const meta: Route.MetaFunction = () => {
   return [
     { title: "Promote Product - Manseryuk" },
-    { name: "description", content: "Promote your product on Manseryuk" }
+    { name: "description", content: "Promote your product on Manseryuk" },
   ];
-}
+};
 
-export default function PromotePage({ loaderData, actionData }: Route.ComponentProps) {
+export default function PromotePage() {
+  const [promotionPeriod, setPromotionPeriod] = useState<
+    DateRange | undefined
+  >();
+  const totalDays =
+    promotionPeriod?.from && promotionPeriod?.to
+      ? DateTime.fromJSDate(promotionPeriod.to).diff(
+          DateTime.fromJSDate(promotionPeriod.from),
+          "days"
+        ).days
+      : 0;
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Promote Your Product</h1>
-      <div className="max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {/* Promotion plans will be rendered here */}
+    <div>
+      <HeroHeader
+        title="Promote Your Product"
+        description="Promote your product on Manseryuk"
+      />
+      <Form className="max-w-sm mx-auto flex flex-col gap-10 items-center">
+        <SelectPair
+          label="Product"
+          description="Select a product to promote"
+          name="product"
+          required
+          placeholder="Select a product"
+          options={[
+            { label: "Product 1", value: "product1" },
+            { label: "Product 2", value: "product2" },
+            { label: "Product 3", value: "product3" },
+          ]}
+        />
+        <div className="flex flex-col gap-2 items-center w-full">
+          <Label className="flex flex-col gap-1">
+            Select a range of dates for promotion{" "}
+            <small className="text-muted-foreground text-center ">
+              Minimum duration is 3 days.
+            </small>
+          </Label>
+
+          <Calendar
+            mode="range"
+            selected={promotionPeriod}
+            onSelect={setPromotionPeriod}
+            min={3}
+            disabled={{ before: new Date() }}
+          />
         </div>
-        
-        <div className="bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Contact Us</h2>
-          <p className="text-gray-600 mb-4">
-            Interested in promoting your product? Get in touch with us to learn more about our promotion options.
-          </p>
-          <a
-            href="mailto:promote@manseryuk.com"
-            className="inline-block px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Contact Sales Team
-          </a>
-        </div>
-      </div>
+        <Button disabled={totalDays === 0}>
+          Go to checkout (${totalDays * 20})
+        </Button>
+      </Form>
     </div>
   );
 }
