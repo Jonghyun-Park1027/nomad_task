@@ -1,56 +1,67 @@
 import { Link } from "react-router";
-import { Card, CardHeader, CardTitle, CardFooter } from "~/common/components/ui/card";
-import { Button } from "~/common/components/ui/button";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/common/components/ui/card";
 import { Badge } from "~/common/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "~/common/components/ui/avatar";
-
-
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "~/common/components/ui/avatar";
+import { Button } from "~/common/components/ui/button";
 
 interface TeamCardProps {
-  teamId: string;
+  id: string;
   leaderUsername: string;
   leaderAvatarUrl: string;
-  lookingFor: string[];
+  positions?: string[]; // optional로 변경
   projectDescription: string;
-  joinUrl?: string;
 }
 
-export function TeamCard({ 
-  teamId, 
-  leaderUsername, 
-  leaderAvatarUrl, 
-  lookingFor, 
-  projectDescription, 
-  joinUrl = `/teams/${teamId}` 
+export function TeamCard({
+  id,
+  leaderUsername,
+  leaderAvatarUrl,
+  positions = [], // 기본값 설정
+  projectDescription,
 }: TeamCardProps) {
   return (
-    <Link to={joinUrl}>
+    <Link to={`/teams/${id}`}>
       <Card className="bg-transparent hover:bg-card/50 transition-colors">
         <CardHeader className="flex flex-row items-center">
-          <CardTitle className="text-base leading-loose space-x-2">
-            <Badge variant="secondary" className="inline-flex shadow-sm items-center">
+          <CardTitle className="text-base leading-loose">
+            <Badge
+              variant={"secondary"}
+              className="inline-flex shadow-sm items-center text-base"
+            >
               <span>@{leaderUsername}</span>
-              <Avatar className="size-4">
-                <AvatarFallback>{leaderUsername.charAt(0)}</AvatarFallback>
-                <AvatarImage src={leaderAvatarUrl} /> 
+              <Avatar className="size-5">
+                <AvatarFallback>{leaderUsername[0]}</AvatarFallback>
+                <AvatarImage src={leaderAvatarUrl} />
               </Avatar>
             </Badge>
-            <span>is looking for</span>
-            {lookingFor.map((role, index) => (
-              <Badge key={index} className="text-base">
-                {role}
-              </Badge>
-            ))}
-            <span>to build</span>
+            <span> is looking for </span>
+            {positions?.map(
+              (
+                position,
+                index // optional chaining 사용
+              ) => (
+                <Badge key={position} className="text-base">
+                  {position}
+                </Badge>
+              )
+            )}
+            <span> to build </span>
             <span>{projectDescription}</span>
           </CardTitle>
         </CardHeader>
-        <CardFooter className="flex justify-end">
-          <Button variant="link" className="cursor-pointer">
-            Join the team &rarr;
-          </Button>
+        <CardFooter className="justify-end">
+          <Button variant={"link"}>Join team &rarr;</Button>
         </CardFooter>
-      </Card> 
+      </Card>
     </Link>
   );
 }

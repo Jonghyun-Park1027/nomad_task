@@ -101,7 +101,7 @@ export default function HomePage() {
             join a team looking for a new member
           </p>
           <Button variant="link" className="text-lg p-0" asChild>
-            <Link to="/products/manseryuk">Explore all teams &rarr;</Link>
+            <Link to="/teams">Explore all teams &rarr;</Link>
           </Button>
         </div>
         {Array.from({ length: 10 }).map((_, index) => (

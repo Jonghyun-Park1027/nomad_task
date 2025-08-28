@@ -45,4 +45,5 @@ Key Conventions
 - `meta` returns MetaFunction type.
 - `json` does not exists anymore. Return plain objects i.e `export function loader({ request }: Route.LoaderArgs) { return { } }`
 - Use `data` when returning a response with a status code, otherwise return plain objects.
-
+- When importing Route, ensure it is imported from the correct path. Example:
+  """import type { Route } from "./+types/community-page";"""
